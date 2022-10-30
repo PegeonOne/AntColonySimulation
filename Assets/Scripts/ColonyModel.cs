@@ -16,7 +16,7 @@ namespace Colony.Models.ColonyModel
         public readonly Dictionary<string, City> Distances = new Dictionary<string, City>();
         public float[,] Pheromons;
 
-        public ColonyModel(int _cityCount, int _antCount, GameObject[] _cityArray)
+        public ColonyModel(int _antCount, int _cityCount, GameObject[] _cityArray)
         {
             this.antCoutn = _antCount;
             this.cityCount = _cityCount;
