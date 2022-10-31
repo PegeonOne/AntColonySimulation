@@ -1,3 +1,5 @@
+using Colony.Models.Path;
+using Colony.Views.Map.Path;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +16,7 @@ namespace Colony.Models.ColonyModel
         public Vector2[] CitiesCoords;
 
         public readonly Dictionary<string, City> Distances = new Dictionary<string, City>();
+        public readonly Dictionary<int, PathView> Paths = new Dictionary<int, PathView>();
         public float[,] Pheromons;
 
         public ColonyModel(int _antCount, int _cityCount, GameObject[] _cityArray)
@@ -35,6 +38,6 @@ namespace Colony.Models.ColonyModel
             Name = name;
             Coordinates = coords;
         }
-    }
+    }  
 }
 

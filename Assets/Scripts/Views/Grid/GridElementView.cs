@@ -1,4 +1,4 @@
-using Colony.Models.PathModel;
+using Colony.Models.Path;
 using Colony.Views.Implementation;
 using UnityEngine;
 using UnityEngine.UI;

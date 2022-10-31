@@ -1,17 +1,20 @@
+using UnityEngine;
 
-namespace Colony.Models.PathModel
+namespace Colony.Models.Path
 {
     public sealed class PathModel
     {
-        public readonly string fromCityName;
-        public readonly string toCityName;
+        public readonly float pathID;
+        public readonly GameObject fromCity;
+        public readonly GameObject toCity;
         public readonly float distance;
         public readonly float pheromon;
 
-        public PathModel(string _fromCityName, string _toCityName, float _dist, float _pheromon)
+        public PathModel(float _pathID, GameObject _fromCityName, GameObject _toCityName, float _dist, float _pheromon)
         {
-            fromCityName = _fromCityName;
-            toCityName = _toCityName;
+            pathID = _pathID;
+            fromCity = _fromCityName;
+            toCity = _toCityName;
             distance = _dist;
             pheromon = _pheromon;
         }

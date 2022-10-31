@@ -1,4 +1,5 @@
 using Colony.Models.ColonyModel;
+using Colony.Models.Path;
 using Colony.Views.Implementation;
 using Colony.Views.Map.Path;
 using Colony.Views.Map.View;
@@ -20,6 +21,10 @@ namespace Colony.Views.UI.IniterView
         MapView MapView;
         [SerializeField]
         GameObject City;
+        [SerializeField]
+        GameObject Path;
+        [SerializeField]
+        Transform PathHolder;
 
         protected override void OnAwake()
         {
@@ -31,17 +36,44 @@ namespace Colony.Views.UI.IniterView
         {
             int cities = Int32.Parse(CityCountField.text);
             int ants = Int32.Parse(AntCountField.text);
-            Model = new ColonyModel(ants, cities, CreateCitiesInstances()) ;
-            
+            Model = new ColonyModel(ants, cities, CreateCitiesInstances()) ; 
             GenerateCities();
+            GeneratePaths(cities);
             gameObject.SetActive(false);
         }
 
-        public void GenerateCities()
+        private void GeneratePaths(int cityCount)
+        {
+            int pathCount = cityCount * (cityCount - 1);
+            for (int i = 0; i < pathCount; i++)
+            {
+                GameObject path = Instantiate(Path);
+                path.transform.SetParent(PathHolder);
+                PathView view = path.GetComponent<PathView>();
+                Model.Paths.Add(i, view);
+            }
+            FillDefaultPathData();
+        }
+
+        private void FillDefaultPathData()
+        {
+            int cityChanger = 0;
+            for (int j = 0; j < Model.CityCount; j++)
+            {
+                for (int k = 0; k < (Model.CityCount - 1); k++)
+                {
+                    float dist = Vector2.Distance(Model.Distances[Model.Cities[j].name].Coordinates, Model.Distances[Model.Cities[k].name].Coordinates);
+                    Model.Paths[k + (j * (Model.CityCount - 1))].Model = new PathModel(dist, Model.Cities[j], Model.Cities[k], dist, 0.05f);
+                    Model.Paths[k + (j * (Model.CityCount - 1))].CreatePath();
+                }
+                cityChanger += Model.CityCount;
+            }
+        }
+
+        private void GenerateCities()
         {
             Vector2 maxSquare = new Vector2(11, 7f);
             Vector2 minSquare = new Vector2(-11, -5f);
-            Debug.Log(Model.CityCount);
             for (int i = 0; i < Model.CityCount; i++)
             {
                 float cityXPos = UnityEngine.Random.Range(minSquare.x, maxSquare.x);
