@@ -1,6 +1,6 @@
 using Colony.Core;
 
-namespace Colony.Views.Implementation
+namespace Colony.Core.Implementation
 {
     public abstract class View : ColonyMainBehavior
     {

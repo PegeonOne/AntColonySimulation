@@ -1,5 +1,5 @@
 
-namespace Colony.Views.Implementation
+namespace Colony.Core.Implementation
 {
     public abstract class ViewWithModel<T> : View
     {
