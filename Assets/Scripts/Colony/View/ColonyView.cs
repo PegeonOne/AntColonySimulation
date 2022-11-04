@@ -2,6 +2,7 @@ using Colony.Models.ColonyModel;
 using UnityEngine;
 using UnityEngine.UI;
 using Colony.Core.Implementation;
+using System;
 
 namespace Colony.City.UI.IniterView
 {
@@ -20,6 +21,8 @@ namespace Colony.City.UI.IniterView
         public Material LineMaterial;
 
         public GameObject SplashScreen;
+
+        public int AntsFinishedPaths;
     }       
 }
 

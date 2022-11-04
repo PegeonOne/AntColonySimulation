@@ -14,8 +14,8 @@ namespace Colony.City.Map.Path
             base.OnStart();
             PathLine = gameObject.GetComponent<LineRenderer>();
             PathLine.positionCount = 2;
-            PathLine.startWidth = 0.2f;
-            PathLine.endWidth = 0.2f;
+            PathLine.startWidth = 0.1f;
+            PathLine.endWidth = 0.1f;
             PathLine.material = material;
             PathLine.SetPosition(0, Model.fromCity.transform.position);
             PathLine.SetPosition(1, Model.toCity.transform.position);

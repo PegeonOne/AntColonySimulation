@@ -7,6 +7,8 @@ using UnityEngine;
 using Colony.Core.Factory;
 using Colony.Core.Implementation;
 using Colony.City.UI.IniterView;
+using Colony.Ant.View;
+using System.Collections.Generic;
 
 public class ColonyController : UnderViewController<ColonyView>
 {
@@ -14,27 +16,61 @@ public class ColonyController : UnderViewController<ColonyView>
     public override void OnControllerStart()
     {
         base.OnControllerStart();
+        factory = new Factory();
         View = GetComponent<ColonyView>();
         View.InitButton.onClick.AddListener(OnColonyInit);
     }
 
+    void AntIterationFinished(float dist, List<string> paths)
+    {
+        View.AntsFinishedPaths++;
+        if(View.AntsFinishedPaths == View.Model.AntCount)
+        {
+            UpdateDatasOnIterationFinished(dist, paths);
+        }
+    }
+
+    void UpdateDatasOnIterationFinished(float dist, List<string> paths)
+    {
+        Debug.Log("Ant Finished path with dist - " +  dist);
+        Debug.Log("Ant come thought out this way ");
+        foreach (var item in paths)
+        {
+            Debug.Log(item);
+        }
+    }
+
+    #region ColonyInitilize
     private void OnColonyInit()
     {
         int cities = Int32.Parse(View.CityCountField.text);
         int ants = Int32.Parse(View.AntCountField.text);
-        View.Model = new ColonyModel(ants, cities, CreateCities());
+        View.Model = new ColonyModel(ants, cities, 4, 1, CreateCities());
         PlaceCities();
         GeneratePaths();
+        SpawnAnts();
         View.SplashScreen.SetActive(false);
     }
 
-
+    private void SpawnAnts()
+    {
+        for (int i = 0; i < View.Model.AntCount; i++)
+        {
+            int antSpawnCity = UnityEngine.Random.Range(0, View.Model.CityCount);
+            GameObject ant = factory.CreateInstance<AntView>("ant " + i, View.Model.CityDatas[antSpawnCity].CityPosition, null);
+            AntView view = ant.GetComponent<AntView>();
+            view.Model = View.Model;
+            view.StartCity = "0" + antSpawnCity.ToString();
+            view.OnAntFinishedIteration += AntIterationFinished;
+            View.Model.Ants.Add(view);
+        }
+    }
 
     private void GeneratePaths()
     {
         for (int j = 0; j < View.Model.CityCount; j++)
         {
-            View.Model.CitiesID.Add(j.ToString());
+            View.Model.CitiesID.Add("0" + j.ToString());
             for (int k = 0; k < View.Model.CityCount; k++)
             {
                 if (j == k) continue;
@@ -43,7 +79,7 @@ public class ColonyController : UnderViewController<ColonyView>
                 PathView view = path.GetComponent<PathView>();
                 view.material = View.LineMaterial;
                 float dist = Vector2.Distance(View.Model.CityDatas[j].CityPosition, View.Model.CityDatas[k].CityPosition);
-                view.Model = new PathModel(dist, View.Model.CitiesGameObjects[j], View.Model.CitiesGameObjects[k], dist, 0.05f);
+                view.Model = new PathModel(dist, View.Model.CitiesGameObjects[j], View.Model.CitiesGameObjects[k], dist, 0.5f);
                 View.Model.Paths.Add(key, view);
             }
         }
@@ -78,5 +114,5 @@ public class ColonyController : UnderViewController<ColonyView>
         }
         return array;
     }
-}
+    #endregion
 }

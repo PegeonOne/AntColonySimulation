@@ -13,18 +13,15 @@ namespace Colony.City.View
 
         public void InitCity(int id, Vector2 cityPosition, ColonyModel model)
         {
-            this.CityID = id;
-            this.CityPosition = cityPosition;
-            this.Model = model;
+            CityID = id;
+            CityPosition = cityPosition;
+            Model = model;
             gameObject.transform.position = cityPosition;
         }
-
-        public event Action<int> InitAnts;
 
         protected override void OnStart()
         {
             base.OnStart();
-            InitAnts?.Invoke(Model.AntCount);
         }
     }
 }

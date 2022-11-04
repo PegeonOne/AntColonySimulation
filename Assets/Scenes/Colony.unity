@@ -388,6 +388,7 @@ MonoBehaviour:
   PathHolder: {fileID: 1023335805}
   LineMaterial: {fileID: 2100000, guid: 785c855dabe09f04d92927357c01b971, type: 2}
   SplashScreen: {fileID: 803619840}
+  EndPathAntsCount: 0
 --- !u!1 &81593944
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +743,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 10
+  m_Text: 1
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -935,7 +936,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 1
 --- !u!222 &840929790
 CanvasRenderer:
   m_ObjectHideFlags: 0
