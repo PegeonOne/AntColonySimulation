@@ -13,6 +13,7 @@ using System.Collections.Generic;
 public class ColonyController : UnderViewController<ColonyView>
 {
     Factory factory;
+  
     public override void OnControllerStart()
     {
         base.OnControllerStart();
@@ -24,20 +25,57 @@ public class ColonyController : UnderViewController<ColonyView>
     void AntIterationFinished(float dist, List<string> paths)
     {
         View.AntsFinishedPaths++;
-        if(View.AntsFinishedPaths == View.Model.AntCount)
+        UpdateDatasOnIterationFinished(dist, paths);
+        if (View.AntsFinishedPaths == View.Model.AntCount)
         {
-            UpdateDatasOnIterationFinished(dist, paths);
+            //Recalculate pheromon on the path
+            //Init next Iteration
+            View.AntsFinishedPaths = 0;
+            RecalculatePheromonsOnPaths();
+            SpawnAnts();
         }
     }
 
+    void RecalculatePheromonsOnPaths()
+    {
+        foreach (var key in View.Model.Paths.Keys)
+        {
+            PathModel NewPathModel = new PathModel();
+            NewPathModel = View.Model.Paths[key].Model;
+            NewPathModel.RebuildPath = true;
+            NewPathModel.pheromon *= 0.6f;
+            NewPathModel.pheromon += NewPathModel.pheromonCollectedOnIteration;
+            View.Model.Paths[key].Model = NewPathModel;
+        }
+        View.Model.Iterations++;
+    }
+
+    float prevMinimumDist = 1000000;
+
     void UpdateDatasOnIterationFinished(float dist, List<string> paths)
     {
-        Debug.Log("Ant Finished path with dist - " +  dist);
-        Debug.Log("Ant come thought out this way ");
-        foreach (var item in paths)
+        if(dist < prevMinimumDist)
         {
-            Debug.Log(item);
+            prevMinimumDist = dist;
+            foreach (var key in View.Model.Paths.Keys)
+            {
+                PathModel NewPathModel = new PathModel();
+                NewPathModel = View.Model.Paths[key].Model;
+                NewPathModel.RebuildPath = true;
+                NewPathModel.color = new Color(0, 1, 1, 0);
+                View.Model.Paths[key].Model = NewPathModel;
+            }
+            foreach (var key in paths)
+            {
+                PathModel NewPathModel = new PathModel();
+                NewPathModel = View.Model.Paths[key].Model;
+                NewPathModel.RebuildPath = true;
+                NewPathModel.pheromonCollectedOnIteration += (2 / prevMinimumDist);
+                NewPathModel.color = new Color(0, 1, 1, 1);
+                View.Model.Paths[key].Model = NewPathModel;  
+            }
         }
+        
     }
 
     #region ColonyInitilize
@@ -45,7 +83,7 @@ public class ColonyController : UnderViewController<ColonyView>
     {
         int cities = Int32.Parse(View.CityCountField.text);
         int ants = Int32.Parse(View.AntCountField.text);
-        View.Model = new ColonyModel(ants, cities, 4, 1, CreateCities());
+        View.Model = new ColonyModel(ants, cities, 1, 1, CreateCities());
         PlaceCities();
         GeneratePaths();
         SpawnAnts();
@@ -62,7 +100,7 @@ public class ColonyController : UnderViewController<ColonyView>
             view.Model = View.Model;
             view.StartCity = "0" + antSpawnCity.ToString();
             view.OnAntFinishedIteration += AntIterationFinished;
-            View.Model.Ants.Add(view);
+            //View.Model.Ants.Add(view);
         }
     }
 
@@ -79,7 +117,7 @@ public class ColonyController : UnderViewController<ColonyView>
                 PathView view = path.GetComponent<PathView>();
                 view.material = View.LineMaterial;
                 float dist = Vector2.Distance(View.Model.CityDatas[j].CityPosition, View.Model.CityDatas[k].CityPosition);
-                view.Model = new PathModel(dist, View.Model.CitiesGameObjects[j], View.Model.CitiesGameObjects[k], dist, 0.5f);
+                view.Model = new PathModel(dist, View.Model.CitiesGameObjects[j], View.Model.CitiesGameObjects[k], dist, 0.05f, false);
                 View.Model.Paths.Add(key, view);
             }
         }

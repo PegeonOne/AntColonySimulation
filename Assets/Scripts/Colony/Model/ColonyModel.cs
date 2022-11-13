@@ -24,7 +24,7 @@ namespace Colony.Models.ColonyModel
         public int CityCount { get { return cityCount; } }
         public int AntCount { get { return antCount; } }
 
-        public int Iterations { set { iterations = value; } }
+        public int Iterations { get { return iterations; } set { iterations = value; } }
 
         public GameObject[] CitiesGameObjects;
 

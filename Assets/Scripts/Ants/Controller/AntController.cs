@@ -13,7 +13,7 @@ namespace Colony.Ant.Controller
             base.OnControllerStart();
             View = GetComponent<AntView>();
             View.VisitedCities.Add(View.StartCity);
-            ChooseNextCity();
+            //ChooseNextCity();
         }
 
         float t = 1;
@@ -21,16 +21,17 @@ namespace Colony.Ant.Controller
         public override void OnControllerUpdate()
         {
             base.OnControllerUpdate();
-            /*t -= Time.deltaTime * 0.7f;
-            if(t <= 0)
+            t -= Time.deltaTime * 20f;
+            if (t <= 0)
             {
                 if ((View.VisitedCities.Count) == View.Model.CityCount)
                 {
                     View.AntFinish(distance, paths);
+                    Destroy(this.gameObject);
                 }
                 else ChooseNextCity();
                 t = 1;
-            }*/
+            }
         }
 
         float distance = 0;
@@ -50,15 +51,14 @@ namespace Colony.Ant.Controller
                         Mathf.Pow(closeness, View.Model.ClosenessInfluence));
                     float P = (W) / (WSum());
                     pSum += P;
-                    Debug.Log(View.Model.CitiesID[i] + " " + P);
-                    /*if (pSum >= value)
+                    if (pSum >= value)
                     {
+                        paths.Add(View.StartCity + View.Model.CitiesID[i]);
                         View.StartCity = View.Model.CitiesID[i];
                         View.VisitedCities.Add(View.StartCity);
                         distance += pathView.Model.distance;
-                        paths.Add(View.StartCity + View.Model.CitiesID[i]);
                         return;
-                    }*/
+                    }
                 }               
             }
             
