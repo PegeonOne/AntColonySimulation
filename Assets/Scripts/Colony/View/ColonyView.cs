@@ -22,7 +22,13 @@ namespace Colony.City.UI.IniterView
 
         public GameObject SplashScreen;
 
+        public GameObject InGameUI;
+
         public int AntsFinishedPaths;
+
+        public Sprite CitySprite;
+
+        public Text DistanceText;
     }       
 }
 

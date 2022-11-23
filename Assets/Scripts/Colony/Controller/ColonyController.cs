@@ -57,6 +57,8 @@ public class ColonyController : UnderViewController<ColonyView>
         if(dist < prevMinimumDist)
         {
             prevMinimumDist = dist;
+            View.Model.MinimalDistance = dist;
+            View.DistanceText.text = View.Model.MinimalDistance.ToString();
             foreach (var key in View.Model.Paths.Keys)
             {
                 PathModel NewPathModel = new PathModel();
@@ -88,6 +90,7 @@ public class ColonyController : UnderViewController<ColonyView>
         GeneratePaths();
         SpawnAnts();
         View.SplashScreen.SetActive(false);
+        View.InGameUI.SetActive(true);
     }
 
     private void SpawnAnts()
@@ -134,7 +137,7 @@ public class ColonyController : UnderViewController<ColonyView>
             float cityYPos = UnityEngine.Random.Range(minSquare.y, maxSquare.y);
             Vector2 cityPosition = new Vector2(cityXPos, cityYPos);
             CityView view = View.Model.CitiesGameObjects[i].GetComponent<CityView>();
-            view.InitCity(i, cityPosition, View.Model);
+            view.InitCity(i, cityPosition, View.Model, View.CitySprite);
             if (View.Model.CityDatas.ContainsKey(i)) View.Model.CityDatas[i] = view;
             else View.Model.CityDatas.Add(i, view);
         }

@@ -13,6 +13,16 @@ namespace Colony.Models.ColonyModel
         int iterations;
         int closnessInfluence;
         int pheromonInfluence;
+        float minimalDistance;
+
+        public float MinimalDistance
+        {
+            get { return minimalDistance; }
+            set
+            {
+                minimalDistance = value;
+            }
+        }
         public int PheromonInfluence
         {
             get { return pheromonInfluence; }
