@@ -21,7 +21,7 @@ namespace Colony.Ant.Controller
         public override void OnControllerUpdate()
         {
             base.OnControllerUpdate();
-            t -= Time.deltaTime * 20f;
+            t -= Time.deltaTime * 150f;
             if (t <= 0)
             {
                 if ((View.VisitedCities.Count) == View.Model.CityCount)

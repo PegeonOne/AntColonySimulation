@@ -14,6 +14,12 @@ namespace Colony.City.UI.IniterView
 
         public InputField CityCountField;
 
+        public InputField AlphaInput;
+
+        public InputField BettaInput;
+
+        public InputField Q;
+
         public Transform CitiesHolder;
 
         public Transform PathHolder;
@@ -29,6 +35,8 @@ namespace Colony.City.UI.IniterView
         public Sprite CitySprite;
 
         public Text DistanceText;
+
+        public Text IterationText;
     }       
 }
 

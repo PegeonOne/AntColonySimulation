@@ -54,7 +54,9 @@ public class ColonyController : UnderViewController<ColonyView>
 
     void UpdateDatasOnIterationFinished(float dist, List<string> paths)
     {
-        if(dist < prevMinimumDist)
+        View.Model.Iterations++;
+        View.IterationText.text = View.Model.Iterations.ToString();
+        if (dist < prevMinimumDist)
         {
             prevMinimumDist = dist;
             View.Model.MinimalDistance = dist;
@@ -72,7 +74,7 @@ public class ColonyController : UnderViewController<ColonyView>
                 PathModel NewPathModel = new PathModel();
                 NewPathModel = View.Model.Paths[key].Model;
                 NewPathModel.RebuildPath = true;
-                NewPathModel.pheromonCollectedOnIteration += (2 / prevMinimumDist);
+                NewPathModel.pheromonCollectedOnIteration += (View.Model.Q / prevMinimumDist);
                 NewPathModel.color = new Color(0, 1, 1, 1);
                 View.Model.Paths[key].Model = NewPathModel;  
             }
@@ -85,7 +87,10 @@ public class ColonyController : UnderViewController<ColonyView>
     {
         int cities = Int32.Parse(View.CityCountField.text);
         int ants = Int32.Parse(View.AntCountField.text);
-        View.Model = new ColonyModel(ants, cities, 1, 1, CreateCities());
+        int alpha = Int32.Parse(View.AlphaInput.text);
+        int betta = Int32.Parse(View.BettaInput.text);
+        int q = Int32.Parse(View.Q.text);
+        View.Model = new ColonyModel(ants, cities, betta, alpha, q, CreateCities());
         PlaceCities();
         GeneratePaths();
         SpawnAnts();
