@@ -19,7 +19,8 @@ public class ColonyController : UnderViewController<ColonyView>
         base.OnControllerStart();
         factory = new Factory();
         View = GetComponent<ColonyView>();
-        View.InitButton.onClick.AddListener(OnColonyInit);
+        View.InitButton.onClick.AddListener(OnStartProgram);
+        View.InvokeButton.onClick.AddListener(OnColonyInit);
     }
 
     void AntIterationFinished(float dist, List<string> paths)
@@ -48,6 +49,19 @@ public class ColonyController : UnderViewController<ColonyView>
             View.Model.Paths[key].Model = NewPathModel;
         }
         View.Model.Iterations++;
+    }
+
+    void ReturnPheromonsToDefault()
+    {
+        foreach (var key in View.Model.Paths.Keys)
+        {
+            PathModel NewPathModel = new PathModel();
+            NewPathModel = View.Model.Paths[key].Model;
+            NewPathModel.RebuildPath = true;
+            NewPathModel.pheromon = 0.05f;
+            NewPathModel.color = new Color(0, 1, 1, 0);
+            View.Model.Paths[key].Model = NewPathModel;
+        }
     }
 
     float prevMinimumDist = 1000000;
@@ -83,19 +97,36 @@ public class ColonyController : UnderViewController<ColonyView>
     }
 
     #region ColonyInitilize
+
+    private void OnStartProgram()
+    {
+        View.SplashScreen.SetActive(false);
+        View.InGameUI.SetActive(true);
+        int cities = Int32.Parse(View.StartCityCountField.text);
+        View.Model = new ColonyModel(1, cities, 1, 1, 1, CreateCities());
+        PlaceCities();
+        GeneratePaths();
+    }
+
     private void OnColonyInit()
     {
-        int cities = Int32.Parse(View.CityCountField.text);
         int ants = Int32.Parse(View.AntCountField.text);
         int alpha = Int32.Parse(View.AlphaInput.text);
         int betta = Int32.Parse(View.BettaInput.text);
         int q = Int32.Parse(View.Q.text);
-        View.Model = new ColonyModel(ants, cities, betta, alpha, q, CreateCities());
-        PlaceCities();
-        GeneratePaths();
-        SpawnAnts();
-        View.SplashScreen.SetActive(false);
-        View.InGameUI.SetActive(true);
+        View.Model.AntCount = ants;
+        View.Model.PheromonInfluence = alpha;
+        View.Model.ClosenessInfluence = betta;
+        View.Model.Q = q;
+        View.Model.Iterations = 0;
+        prevMinimumDist = 100000;
+        ReturnPheromonsToDefault();
+        if (View.Model.AntsObjs.Count != 0)
+        {
+            RemoveAnts();
+            SpawnAnts();
+        }
+        else SpawnAnts();  
     }
 
     private void SpawnAnts()
@@ -108,8 +139,18 @@ public class ColonyController : UnderViewController<ColonyView>
             view.Model = View.Model;
             view.StartCity = "0" + antSpawnCity.ToString();
             view.OnAntFinishedIteration += AntIterationFinished;
+            View.Model.AntsObjs.Add(ant);
             //View.Model.Ants.Add(view);
         }
+    }
+
+    private void RemoveAnts()
+    {
+        foreach (var ant in View.Model.AntsObjs)
+        {
+            Destroy(ant);
+        }
+        View.Model.AntsObjs.Clear();
     }
 
     private void GeneratePaths()
@@ -150,7 +191,7 @@ public class ColonyController : UnderViewController<ColonyView>
 
     GameObject[] CreateCities()
     {
-        int cityCount = Int32.Parse(View.CityCountField.text);
+        int cityCount = Int32.Parse(View.StartCityCountField.text);
         GameObject[] array = new GameObject[cityCount];
         for (int i = 0; i < cityCount; i++)
         {

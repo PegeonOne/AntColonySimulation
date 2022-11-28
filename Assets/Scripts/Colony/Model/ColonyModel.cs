@@ -40,7 +40,7 @@ namespace Colony.Models.ColonyModel
             set { closnessInfluence = value; }
         }
         public int CityCount { get { return cityCount; } }
-        public int AntCount { get { return antCount; } }
+        public int AntCount { get { return antCount; } set { antCount = value; } }
 
         public int Iterations { get { return iterations; } set { iterations = value; } }
 
@@ -51,6 +51,7 @@ namespace Colony.Models.ColonyModel
         public readonly Dictionary<int, CityView> CityDatas = new Dictionary<int, CityView>();
         public readonly Dictionary<string, PathView> Paths = new Dictionary<string, PathView>();
         public readonly List<AntView> Ants = new List<AntView>();
+        public List<GameObject> AntsObjs = new List<GameObject>();
         public float[,] Pheromons;
 
         public ColonyModel(int _antCount, int _cityCount, int _closenessInf, int _pheromoneInf, int _q, GameObject[] _cityArray)

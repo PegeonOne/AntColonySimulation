@@ -10,9 +10,13 @@ namespace Colony.City.UI.IniterView
     {
         public Button InitButton;
 
+        public Button InvokeButton;
+
         public InputField AntCountField;
 
         public InputField CityCountField;
+
+        public InputField StartCityCountField;
 
         public InputField AlphaInput;
 
