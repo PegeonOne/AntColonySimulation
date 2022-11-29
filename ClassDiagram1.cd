@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Colony.Ant.Controller.AntController" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAQAQAAAAAAACAAQAAAAEAAAAAAAAQAACAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Ants\Controller\AntController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.Ant.View.AntView" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAEAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Ants\View\AntView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.City.View.CityView" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAEAAAAAAAAAAAAAAAgAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Cities\View\CityView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColonyController" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAQAEgDgAACBAAAABQAAAQAAAAAAAEAAACAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Colony\Controller\ColonyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ForInGameBtnControl" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ForInGameBtnControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.Models.ColonyModel.ColonyModel" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAEAUAABAMAAgACAAIAQAEEAAAAAAEEAgQgAAM=</HashCode>
+      <FileName>Assets\Scripts\Colony\Model\ColonyModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.City.UI.IniterView.ColonyView" Collapsed="true">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAQEAAAQyACAAAEAAhgAAAAAACAAAEAAAoAAA=</HashCode>
+      <FileName>Assets\Scripts\Colony\View\ColonyView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.Core.Factory.Factory" Collapsed="true">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Factory\Factory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.Core.ColonyMainBehavior" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Implementetion\ColonyMainBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.Core.Implementation.UnderViewController&lt;T&gt;" Collapsed="true">
+    <Position X="1.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAACAAAAAAAAAAAAAAAAABAAAAACAAACAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Core\Implementetion\UnderViewController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.Core.Implementation.View" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAQCAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAEA=</HashCode>
+      <FileName>Assets\Scripts\Core\Implementetion\View.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.Core.Implementation.ViewWithModel&lt;T&gt;" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAgAAAAAAAAAAAAAAAAgAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\Implementetion\ViewWithModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.Models.Path.PathModel" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAACAAAAAAAAAAEiAAASAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Path\Model\PathModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colony.City.Map.Path.PathView" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAIAAAAAAAAEAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Path\View\PathView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

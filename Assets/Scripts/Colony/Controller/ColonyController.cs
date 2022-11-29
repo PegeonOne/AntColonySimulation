@@ -175,7 +175,7 @@ public class ColonyController : UnderViewController<ColonyView>
 
     private void PlaceCities()
     {
-        Vector2 maxSquare = new Vector2(11, 7f);
+        Vector2 maxSquare = new Vector2(11, 6f);
         Vector2 minSquare = new Vector2(-11, -5f);
         for (int i = 0; i < View.Model.CityCount; i++)
         {
